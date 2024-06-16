@@ -27,14 +27,16 @@ async function addnewquestion(req,res){
      try {
 
         const userID = req.user.userid
-        const insertNewQuestion = `INSERT INTO questions (questionid,userid,title,description,tag) VALUES( ?,?,?,?,?)`
+        const insertNewQuestion = `INSERT INTO questions(questionid,userid,title,description,tag) VALUES( ?,?,?,?,?)`
         await dbconnection.query(insertNewQuestion,[id2,userID,title,description,tag])
+
+        return res.status(StatusCodes.OK).json({msg:`A new question asked by User ${req.user.username} is added to the database.`})
         
      } catch (error) {
         console.log(error)
      }
 
-    return res.status(StatusCodes.OK).json({msg:`A new question asked by User ${req.user.username} is added to the database.`})
+    
 
    
 }
