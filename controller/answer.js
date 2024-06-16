@@ -44,7 +44,7 @@ async function getAnswers(req,res){
          // console.log("response", response[0])
          res.status(StatusCodes.OK).send(response)
       } else{
-         console.log("mels",AnswerforspecicQuestion.length)
+         // console.log("mels",AnswerforspecicQuestion.length)
          res.status(StatusCodes.OK).send(AnswerforspecicQuestion)
       }
 

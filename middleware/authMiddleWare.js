@@ -4,7 +4,7 @@ const jwt = require("jsonwebtoken");
 async function autoMiddleWare(req, res, next) {
     const authHeader = req.headers.authorization;
 
-    if (!authHeader) {
+    if (!authHeader ||!authHeader.startsWith('Bearer')) {
         return res
             .status(StatusCodes.UNAUTHORIZED)
             .json({ msg: "NO AUTORIZATION" });

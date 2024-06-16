@@ -120,7 +120,7 @@ async function deleteQuestion(req,res){
       const getTitleandDescription = `SELECT  questions.title,questions.description ,questions.tag, users.username  FROM questions INNER JOIN users ON questions.userid = users.userid  WHERE questionid = ?`
 
       const response = await dbconnection.query( getTitleandDescription,[QUestionID])
-      console.log(response[0])
+      // console.log(response[0])
 
       res.status(StatusCodes.OK).send(response[0])
 
@@ -184,4 +184,21 @@ async function totalQuestion(req,res){
         res.status(StatusCodes.BAD_REQUEST).send(error)
    }
 }
-module.exports = {addnewquestion,getallquestions,deleteQuestion,updateQuestion,getQuestionTitleAndDescription,totalQuestion}
+
+async function searchedQuestions(req,res){
+   try {
+      const {searchWord}=req.body
+
+      const SearchedQuest = `SELECT questions.title ,questions.questionid, users.username,COUNT(answers.answerid) AS num_answers FROM questions INNER JOIn users ON questions.userid=users.userid LEFT JOIN answers ON questions.questionid = answers.questionid WHERE questions.title LIKE ?   GROUP BY users.username, questions.title, questions.questionid`
+
+       const[ result] = await dbconnection.query(SearchedQuest,[`%${searchWord}%`]) 
+      //  console.log(result)
+
+       res.status(StatusCodes.OK).json(result)
+
+   } catch (error) {
+      console.log(error)
+        res.status(StatusCodes.BAD_REQUEST).send(error)
+   }
+}
+module.exports = {addnewquestion,getallquestions,deleteQuestion,updateQuestion,getQuestionTitleAndDescription,totalQuestion,searchedQuestions}
