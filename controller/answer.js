@@ -32,7 +32,7 @@ async function getAnswers(req,res){
    // console.log(QUestionID)
 
    try {
-      const getanswersANDusers = `SELECT  answers.answer,answers.answerid,  users.username FROM answers INNER JOIN users ON users.userid = answers.userid WHERE answers.questionid = ${QUestionID}`
+      const getanswersANDusers = `SELECT  answers.answer,answers.answerid,  users.username FROM answers INNER JOIN users ON users.userid = answers.userid WHERE answers.questionid = ${QUestionID} ORDER BY answerid DESC`
 
       const [AnswerforspecicQuestion] = await dbconnection.query(getanswersANDusers)
      

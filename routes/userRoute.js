@@ -7,7 +7,7 @@ const router = express.Router()
 const authMiddleWare = require('../middleware/authMiddleWare')
 
 //import user controller
-const  {register,login,checkUser} = require('../controller/userController')
+const  {register,login,checkUser,reset, sendToken} = require('../controller/userController')
 
 
 //* register user
@@ -15,6 +15,10 @@ router.post('/register',register)
 
 //? login user
 router.post('/login',login)
+
+//!reset
+router.post('/reset',sendToken)
+router.post('/reset/update',reset)
 
 
 //todo check user

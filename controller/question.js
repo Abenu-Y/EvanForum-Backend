@@ -203,4 +203,6 @@ async function searchedQuestions(req,res){
         res.status(StatusCodes.BAD_REQUEST).send(error)
    }
 }
+
+
 module.exports = {addnewquestion,getallquestions,deleteQuestion,updateQuestion,getQuestionTitleAndDescription,totalQuestion,searchedQuestions}

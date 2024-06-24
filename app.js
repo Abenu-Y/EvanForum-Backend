@@ -45,6 +45,9 @@ app.use('/api/questions',autoMiddleWare,questionRoutes)
 
 app.use('/api/answers',autoMiddleWare, answerRoutes)
 
+
+
+
 //* register user
 // app.post('/api/users/register',(req,res)=>{
 //     res.send('register user')
